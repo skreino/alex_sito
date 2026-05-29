@@ -6,4 +6,3 @@ dist/
 *.log
 dev.out.log
 dev.err.log
-vercel.json
