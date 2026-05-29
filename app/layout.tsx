@@ -3,25 +3,32 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://alex-rox-tattoo.vercel.app"),
-  title: "ALEX ROX | Chicano Black & Grey Tattoo Artist Busnago",
+  title: "ALEX ROX | Tattoo Chicano Black & Grey a Busnago",
   description:
-    "Premium Chicano, blackwork, lettering, realism and black and grey tattoo artist in Busnago MB. Custom tattoo bookings via WhatsApp.",
+    "Tatuaggi custom chicano, blackwork, lettering, realismo e black and grey a Busnago MB. Prenotazioni dirette su WhatsApp.",
   keywords: [
     "ALEX ROX",
     "tattoo Busnago",
-    "Chicano tattoo",
+    "tatuaggi chicano",
     "black and grey tattoo",
-    "lettering tattoo",
+    "lettering tattoo Busnago",
     "blackwork tattoo",
-    "realism tattoo"
+    "realismo tattoo"
   ],
+  alternates: {
+    canonical: "/",
+    languages: {
+      it: "/",
+      en: "/"
+    }
+  },
   openGraph: {
     title: "ALEX ROX | Chicano Soul. Black Ink. Real Stories.",
     description:
-      "Custom tattoos built around identity, style and meaning. Black and grey, lettering and chicano-inspired work.",
+      "Tatuaggi custom costruiti intorno a identita, stile e significato. Black and grey, lettering e lavori chicano.",
     type: "website",
-    locale: "en_US",
-    images: ["/images/tattoos/tattoo (1).jpeg"]
+    locale: "it_IT",
+    images: ["/images/brand/alex-rox-logo.png"]
   },
   robots: {
     index: true,
@@ -31,7 +38,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="it">
       <body>{children}</body>
     </html>
   );
