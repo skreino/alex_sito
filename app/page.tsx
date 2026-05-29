@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { AnimatePresence, motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowLeft, ArrowRight, ExternalLink, Menu, MessageCircle, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Lang = "it" | "en";
 type Category = "all" | "chicano" | "lettering" | "blackwork" | "realism";
@@ -43,8 +43,7 @@ const dictionary = {
       label: "Dietro il segno",
       title: "Non solo inchiostro. Un segno con peso.",
       copy: "Ogni tatuaggio parte da una storia. Dal lettering al blackwork, ogni pezzo nasce con contrasto, precisione e personalita.",
-      details: ["Disegni custom", "Appuntamenti privati", "Studio pulito", "Specialista black and grey"],
-      note: "sessioni private / lavori custom"
+      details: ["Disegni custom", "Appuntamenti privati", "Studio pulito", "Specialista black and grey"]
     },
     styles: {
       label: "Stili",
@@ -60,21 +59,10 @@ const dictionary = {
     work: {
       label: "Portfolio",
       title: "Lavori selezionati",
-      copy: "Black and grey, chicano, lettering e pezzi custom.",
       open: "Apri immagine tatuaggio",
       previous: "Tatuaggio precedente",
       next: "Tatuaggio successivo",
       close: "Chiudi lightbox"
-    },
-    gallery: {
-      title: "Galleria",
-      categories: {
-        all: "Tutti",
-        chicano: "Chicano",
-        lettering: "Lettering",
-        blackwork: "Blackwork",
-        realism: "Realismo"
-      }
     },
     process: {
       title: "Idea. Disegno. Pelle.",
@@ -141,8 +129,7 @@ const dictionary = {
       label: "The Work Behind The Mark",
       title: "Not just ink. A mark with meaning.",
       copy: "Every tattoo starts from a story. From lettering to blackwork, each piece is designed with contrast, precision and personality.",
-      details: ["Custom designs", "Private appointments", "Clean studio", "Black & grey specialist"],
-      note: "private sessions / custom work"
+      details: ["Custom designs", "Private appointments", "Clean studio", "Black & grey specialist"]
     },
     styles: {
       label: "Styles",
@@ -158,21 +145,10 @@ const dictionary = {
     work: {
       label: "Portfolio",
       title: "Selected Works",
-      copy: "Black and grey, chicano, lettering and custom pieces.",
       open: "Open tattoo image",
       previous: "Previous tattoo",
       next: "Next tattoo",
       close: "Close lightbox"
-    },
-    gallery: {
-      title: "Gallery",
-      categories: {
-        all: "All",
-        chicano: "Chicano",
-        lettering: "Lettering",
-        blackwork: "Blackwork",
-        realism: "Realism"
-      }
     },
     process: {
       title: "From idea to skin",
@@ -416,7 +392,6 @@ function Intro({ t }: { t: typeof dictionary.it }) {
         <Reveal className="relative min-h-[520px] overflow-hidden bg-blackdeep">
           <Image src={tattoos[18].src} alt="Tattoo artist studio work" fill sizes="(min-width: 1024px) 48vw, 100vw" className="object-cover grayscale transition duration-700 hover:scale-105" />
           <div className="absolute inset-0 bg-blackdeep/20" />
-          <span className="absolute bottom-5 left-5 accent text-3xl text-paper">{t.intro.note}</span>
         </Reveal>
       </div>
     </section>
@@ -484,7 +459,6 @@ function TattooSlider({ t }: { t: typeof dictionary.it }) {
             <p className="mb-4 text-xs uppercase tracking-[0.32em] text-warm">{t.work.label}</p>
             <h2 className="display text-[18vw] md:text-9xl">{t.work.title}</h2>
           </div>
-          <p className="max-w-md text-lg text-warm">{t.work.copy}</p>
         </Reveal>
         <div className="grain relative" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
           <div className="grid items-center gap-5 lg:grid-cols-[.5fr_1.3fr_.5fr]">
@@ -536,50 +510,20 @@ function TattooSlider({ t }: { t: typeof dictionary.it }) {
   );
 }
 
-function Gallery({ t }: { t: typeof dictionary.it }) {
-  const [filter, setFilter] = useState<Category>("all");
-  const categories: Category[] = ["all", "chicano", "lettering", "blackwork", "realism"];
-  const visible = useMemo(() => (filter === "all" ? tattoos : tattoos.filter((item) => item.category === filter)), [filter]);
-  return (
-    <section className="mx-auto max-w-[1500px] px-4 py-24 md:px-8 lg:py-36">
-      <Reveal className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
-        <h2 className="display text-[18vw] md:text-9xl">{t.gallery.title}</h2>
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
-          {categories.map((category) => (
-            <button key={category} onClick={() => setFilter(category)} className={`border px-4 py-3 text-xs font-black uppercase tracking-[0.18em] transition ${filter === category ? "border-paper bg-paper text-blackdeep" : "border-paper/20 text-warm hover:text-paper"}`}>
-              {t.gallery.categories[category]}
-            </button>
-          ))}
-        </div>
-      </Reveal>
-      <div className="masonry">
-        {visible.map((item, i) => (
-          <Reveal key={item.src} className="masonry-item">
-            <div className="group relative overflow-hidden bg-ink">
-              <Image src={item.src} alt={item.alt} width={900} height={i % 3 === 0 ? 1200 : 1000} loading="lazy" className="h-auto w-full grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0" />
-              <div className="absolute inset-0 bg-blackdeep/10 transition group-hover:bg-transparent" />
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Process({ t }: { t: typeof dictionary.it }) {
   return (
-    <section className="relative overflow-hidden bg-paper py-24 text-blackdeep lg:py-32">
+    <section className="relative overflow-hidden bg-paper py-14 text-blackdeep md:py-24 lg:py-32">
       <LogoWatermark dark />
       <div className="relative z-10 mx-auto max-w-[1500px] px-4 md:px-8">
-        <Reveal className="mb-12">
-          <h2 className="display text-[17vw] md:text-9xl">{t.process.title}</h2>
+        <Reveal className="mb-7 md:mb-12">
+          <h2 className="display text-[14vw] md:text-9xl">{t.process.title}</h2>
         </Reveal>
-        <div className="grid border-l border-t border-blackdeep/25 md:grid-cols-4">
+        <div className="grid grid-cols-2 border-l border-t border-blackdeep/25 md:grid-cols-4">
           {t.process.steps.map(([title, text], i) => (
-            <Reveal key={title} className="min-h-[260px] border-b border-r border-blackdeep/25 p-6 md:p-8">
-              <span className="display text-7xl text-blackdeep/20">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="display mt-10 text-4xl">{title}</h3>
-              <p className="mt-5 text-blackdeep/65">{text}</p>
+            <Reveal key={title} className="min-h-[150px] border-b border-r border-blackdeep/25 p-4 md:min-h-[260px] md:p-8">
+              <span className="display text-4xl text-blackdeep/20 md:text-7xl">{String(i + 1).padStart(2, "0")}</span>
+              <h3 className="display mt-6 text-2xl md:mt-10 md:text-4xl">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-blackdeep/65 md:mt-5 md:text-base">{text}</p>
             </Reveal>
           ))}
         </div>
@@ -706,7 +650,6 @@ export default function Page() {
         <Intro t={t} />
         <Styles t={t} />
         <TattooSlider t={t} />
-        <Gallery t={t} />
         <Process t={t} />
         <Booking t={t} />
         <TestimonialsFaqFooter t={t} />
